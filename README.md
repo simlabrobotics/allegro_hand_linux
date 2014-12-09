@@ -1,5 +1,6 @@
 Allegro Hand Linux Project
 ==========================
+Note: This project works only for PEAK System CAN interface (chardev) for USB: PCAN-USB
 
 Download
 ========
@@ -11,7 +12,6 @@ https://github.com/simlabrobotics/allegro_hand_linux
 
 Build and Run: "grasp"
 ======================
-Note: This project is for PEAK System USB CAN chardev interface: PCAN-USB
 
 1. Download, build, and install PCAN-USB driver for Linux: libpcan
 
