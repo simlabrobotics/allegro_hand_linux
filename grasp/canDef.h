@@ -19,105 +19,39 @@
 #endif
 
 
-
 CANAPI_BEGIN
-
-
-typedef struct{
-	unsigned char	STD_EXT;
-	unsigned long	msg_id;         // message identifier
-   	unsigned char	data_length;    //
-   	char			data[8];        // data array
-} can_msg;
-
-#define		STD		(bool)0
-#define		EXT		(bool)1
-
-///////////////////////////////////////////////
-//  Define Control Board ID number
-#define ID_COMMON			0x01
-#define ID_DEVICE_MAIN		0x02
-#define ID_DEVICE_SUB_01	0x03
-#define ID_DEVICE_SUB_02	0x04
-#define ID_DEVICE_SUB_03	0x05
-#define ID_DEVICE_SUB_04	0x06
-#define ID_DEVICE_SUB_05	0x07
-#define ID_DEVICE_SUB_06	0x08
-#define ID_DEVICE_SUB_07	0x09
-#define ID_DEVICE_SUB_08	0x0a
-#define ID_DEVICE_SUB_09	0x0b
-#define ID_DEVICE_SUB_10	0x0c
 
 ////////////////////////////////////////////////
 //  Define CAN Command
-#define ID_CMD_SET_SYSTEM_ON			0x01
-#define ID_CMD_SET_SYSTEM_OFF			0x02
-#define ID_CMD_SET_PERIOD				0x03
-#define ID_CMD_SET_MODE_JOINT			0x04
-#define ID_CMD_SET_MODE_TASK			0x05
-#define ID_CMD_SET_TORQUE_1				0x06
-#define ID_CMD_SET_TORQUE_2				0x07
-#define ID_CMD_SET_TORQUE_3				0x08
-#define ID_CMD_SET_TORQUE_4				0x09
-#define ID_CMD_SET_POSITION_1			0x0a
-#define ID_CMD_SET_POSITION_2			0x0b
-#define ID_CMD_SET_POSITION_3			0x0c
-#define ID_CMD_SET_POSITION_4			0x0d
-#define ID_CMD_QUERY_STATE_DATA			0x0e
-#define ID_CMD_QUERY_CONTROL_DATA		0x0f
-#define ID_CMD_QUERY_ID					0x10
-#define ID_CMD_AHRS_SET					0x11
-#define ID_CMD_AHRS_POSE				0x12
-#define ID_CMD_AHRS_ACC					0x13
-#define ID_CMD_AHRS_GYRO				0x14
-#define ID_CMD_AHRS_MAG					0x15
+#define ID_CMD_SYSTEM_ON                0x40
+#define ID_CMD_SYSTEM_OFF               0x41
+#define ID_CMD_SET_TORQUE               0x60
+#define ID_CMD_SET_TORQUE_1             (ID_CMD_SET_TORQUE+0)
+#define ID_CMD_SET_TORQUE_2             (ID_CMD_SET_TORQUE+1)
+#define ID_CMD_SET_TORQUE_3             (ID_CMD_SET_TORQUE+2)
+#define ID_CMD_SET_TORQUE_4             (ID_CMD_SET_TORQUE+3)
+#define ID_CMD_SET_POSE_1               0xE0
+#define ID_CMD_SET_POSE_2               0xE1
+#define ID_CMD_SET_POSE_3               0xE2
+#define ID_CMD_SET_POSE_4               0xE3
+#define ID_CMD_SET_PERIOD               0x81
+#define ID_CMD_CONFIG                   0x68
 
 ////////////////////////////////////////////////
-//  Define Control Channel in Device
-#define MOTOR_CH_1			0x01
-#define MOTOR_CH_2			0x02
-#define MOTOR_CH_3			0x03
-#define MOTOR_CH_4			0x04
-#define MOTOR_CH_ALL		0x05
-#define DEVICE_SYSTEM		0x06
-
-////////////////////////////////////////////////
-// Define State
-#define STATE_CH1			0x01
-#define STATE_CH2			0x02
-#define STATE_CH3			0x04
-#define STATE_CH4			0x08
-#define STATE_ALL			0x10
-#define STATE_SYSTEM		0x80
-
-////////////////////////////////////////////////
-//   Define Motor State
-#define SYSTEM_ON		0x01 
-#define SYSTEM_OFF		0x02
-#define MOTOR_RUN		0x04
-#define MOTOR_STOP		0x08
-
-#define MOTOR_DIR_CW	0x01
-#define MOTOR_DIR_CCW	0x02
-
-#define ON	1
-#define OFF 0
-
-////////////////////////////////////////////////
-//   Define AHRS Data Rate&Mask
-#define AHRS_RATE_1Hz	0x00 
-#define AHRS_RATE_10Hz	0x01 
-#define AHRS_RATE_20Hz	0x02 
-#define AHRS_RATE_50Hz	0x03 
-#define AHRS_RATE_100Hz	0x04 
-
-#define AHRS_MASK_POSE	0x01
-#define AHRS_MASK_ACC	0x02
-#define AHRS_MASK_GYRO	0x04
-#define AHRS_MASK_MAG	0x08
-
-////////////////////////////////////////////////
-
+//  Define CAN Data Reqeust (RTR)
+#define ID_RTR_HAND_INFO                0x80
+#define ID_RTR_SERIAL                   0x88
+#define ID_RTR_FINGER_POSE              0x20
+#define ID_RTR_FINGER_POSE_1            (ID_RTR_FINGER_POSE+0)
+#define ID_RTR_FINGER_POSE_2            (ID_RTR_FINGER_POSE+1)
+#define ID_RTR_FINGER_POSE_3            (ID_RTR_FINGER_POSE+2)
+#define ID_RTR_FINGER_POSE_4            (ID_RTR_FINGER_POSE+3)
+#define ID_RTR_IMU_DATA                 0x30
+#define ID_RTR_TEMPERATURE              0x38
+#define ID_RTR_TEMPERATURE_1            (ID_RTR_TEMPERATURE+0)
+#define ID_RTR_TEMPERATURE_2            (ID_RTR_TEMPERATURE+1)
+#define ID_RTR_TEMPERATURE_3            (ID_RTR_TEMPERATURE+2)
+#define ID_RTR_TEMPERATURE_4            (ID_RTR_TEMPERATURE+3)
 
 
 CANAPI_END
