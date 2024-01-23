@@ -3,23 +3,8 @@
 
 // myAllegroHand.cpp : Defines the entry point for the console application.
 //
-#include <stdio.h>
-#include <stdint.h>
-#include <unistd.h>
-#include <termios.h>  //_getch
-#include <string.h>
-#include <pthread.h>
-#include "canAPI.h"
-#include "rDeviceAllegroHandCANDef.h"
-#include "RockScissorsPaper.h"
-#include <BHand/BHand.h>
-#include <iostream>
 
-#define PEAKCAN (1)
-
-typedef char    TCHAR;
-#define _T(X)   X
-#define _tcsicmp(x, y)   strcmp(x, y)
+#include "can_communicator.h"
 
 using namespace std;
 
@@ -50,17 +35,6 @@ const int	HAND_VERSION = 4;
 
 const double tau_cov_const_v4 = 1200.0; // 1200.0 for SAH040xxxxx
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// functions declarations
-char Getch();
-void PrintInstruction();
-void MainLoop();
-bool OpenCAN();
-void CloseCAN();
-int GetCANChannelIndex(const TCHAR* cname);
-bool CreateBHandAlgorithm();
-void DestroyBHandAlgorithm();
-void ComputeTorque();
 
 /////////////////////////////////////////////////////////////////////////////////////////
 // Read keyboard input (one char) from stdin
@@ -288,9 +262,6 @@ void MainLoop()
         
         case '7': 
             MotionCustom1();
-            for (int i=0; i<16; i++) {
-                std::cout << "Custom 1" << std::endl;
-            }
             break;
         }
     }
@@ -530,24 +501,5 @@ int GetCANChannelIndex(const TCHAR* cname)
         return 0;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////
-// Program main
-int main(int argc, TCHAR* argv[])
-{
-    PrintInstruction();
 
-    memset(&vars, 0, sizeof(vars));
-    memset(q, 0, sizeof(q));
-    memset(q_des, 0, sizeof(q_des));
-    memset(tau_des, 0, sizeof(tau_des));
-    memset(cur_des, 0, sizeof(cur_des));
-    curTime = 0.0;
 
-    if (CreateBHandAlgorithm() && OpenCAN())
-        MainLoop();
-
-    CloseCAN();
-    DestroyBHandAlgorithm();
-
-    return 0;
-}
