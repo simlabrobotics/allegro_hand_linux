@@ -4,6 +4,10 @@
 void MotionRock();
 void MotionScissors();
 void MotionPaper();
-void MotionCustom1();
+void random_pos();
+void custom1();
+void custom2();
+void custom3();
+void reset(); 
 
 #endif

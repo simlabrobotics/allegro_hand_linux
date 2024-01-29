@@ -259,9 +259,25 @@ void MainLoop()
         case '3':
             MotionPaper();
             break;
+
+        // case '4':
+        //     random_pos();
+        //     break;
+        
+        case '5':
+            custom2();
+            break;
+
+        case '6':
+            custom3();
+            break;
         
         case '7': 
-            MotionCustom1();
+            custom1();
+            break;
+        
+        case '0':
+            reset();
             break;
         }
     }

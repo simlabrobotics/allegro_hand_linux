@@ -38,6 +38,25 @@ static double scissors[] = {
 	1.0244, 1.0, 0.6331, 1.3509, 1.0};
 
 
+static double cust1[] = {
+	0.0, 1.6, 0.426, 0.0,
+	0.109, 0.0, 0.0, 0.0,
+	0.048, 0.0, 0.0, 0.072,
+	1.396, 0.018, 0.0, 1.089};
+
+static double cust2[] = { 
+	-0.2124, -0.177, 0.148, 1.312,
+	0.012, 0.323, 1.079, 1.335, 
+	-0.144, 0.943, 0.335, 1.458, 
+	0.323, 0.182, 0.702, 0.297
+};
+
+static double cust3[] = {
+	-0.389, 1.250, 1.088, -0.20,
+	0.011, 0.262,-0.036, 1.278, 
+	0.210, 0.191, 0.875, 0.122, 
+	0.405, 0.798, 0.863, 0.202
+};
 
 
 extern BHand* pBHand;
@@ -90,7 +109,7 @@ void MotionPaper()
 
 #include <random>
 
-void MotionCustom1()
+void random_pos()
 {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
@@ -106,6 +125,37 @@ void MotionCustom1()
 		q_des[i] = custom1[i];
 	}
 	
+	if (pBHand) pBHand->SetMotionType(eMotionType_JOINT_PD);
+	SetGainsRSP();
+}
+
+void custom1()
+{
+	for (int i=0; i<16; i++)
+		q_des[i] = cust1[i];
+	if (pBHand) pBHand->SetMotionType(eMotionType_JOINT_PD);
+	SetGainsRSP();
+}
+
+void custom2()
+{
+	for (int i=0; i<16; i++)
+		q_des[i] = cust2[i];
+	if (pBHand) pBHand->SetMotionType(eMotionType_JOINT_PD);
+	SetGainsRSP();
+}
+
+void custom3()
+{
+	for (int i=0; i<16; i++)
+		q_des[i] = cust3[i];
+	if (pBHand) pBHand->SetMotionType(eMotionType_JOINT_PD);
+	SetGainsRSP();
+}
+
+void reset() { 
+	for (int i=0; i<16; i++)
+		q_des[i] = 0.0;
 	if (pBHand) pBHand->SetMotionType(eMotionType_JOINT_PD);
 	SetGainsRSP();
 }
