@@ -15,20 +15,12 @@ class controller : public rclcpp::Node
 public:
     controller(): Node("controller")
     {
-        // Create a publisher
-        publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
-        
-        timer_ = this->create_wall_timer(
-            500ms, std::bind(&controller::timer_callback, this));
-
         reset_srv = create_service<std_srvs::srv::Trigger>(
         "~/reset",
         std::bind(
             &controller::reset_callback,
             this, std::placeholders::_1,
             std::placeholders::_2));
-
-            
     }
 private:
 
@@ -45,12 +37,8 @@ private:
         memset(tau_des, 0, sizeof(tau_des));
         memset(cur_des, 0, sizeof(cur_des));
         curTime = 0.0;
-
-        if (CreateBHandAlgorithm() && OpenCAN()) {
-            MotionScissors();
-        }
+        reset();        
     }
-
 
     void timer_callback()
     {
@@ -58,21 +46,6 @@ private:
         message.data = "Hello, world!";
         RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
         publisher_->publish(message);
-
-        // memset(&vars, 0, sizeof(vars));
-        // memset(q, 0, sizeof(q));
-        // memset(q_des, 0, sizeof(q_des));
-        // memset(tau_des, 0, sizeof(tau_des));
-        // memset(cur_des, 0, sizeof(cur_des));
-        // curTime = 0.0;
-
-        // if (CreateBHandAlgorithm() && OpenCAN())
-        //     //     MainLoop();
-        //     MotionScissors();
-
-        //     CloseCAN();
-        //     DestroyBHandAlgorithm();
-
     }
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
     rclcpp::TimerBase::SharedPtr timer_;
@@ -81,9 +54,13 @@ private:
 
 int main(int argc, char *argv[])
 {
+    CreateBHandAlgorithm();
+    OpenCAN();
     rclcpp::init(argc, argv);
     rclcpp::spin(std::make_shared<controller>());
     rclcpp::shutdown();
+    CloseCAN();
+    DestroyBHandAlgorithm();     
     return 0;
 }
 
