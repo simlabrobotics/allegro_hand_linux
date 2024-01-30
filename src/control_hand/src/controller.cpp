@@ -15,7 +15,6 @@ class controller : public rclcpp::Node
 public:
     controller(): Node("controller")
     {
-
         reset_srv = create_service<std_srvs::srv::Trigger>(
         "~/reset",
         std::bind(
@@ -29,6 +28,8 @@ public:
             &controller::move_callback,
             this, std::placeholders::_1,
             std::placeholders::_2));
+
+        
     }
 private:
     rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr reset_srv;
@@ -61,6 +62,10 @@ private:
             case 2:
                 MotionPaper();
                 break;
+
+            case 3:
+                custom3();
+                break;
             
             default:
                 RCLCPP_ERROR(this->get_logger(), "Invalid configuration");
@@ -68,8 +73,6 @@ private:
                 break;
         }
     }
-
-
 };
 
 int main(int argc, char *argv[])
