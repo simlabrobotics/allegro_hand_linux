@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.22)
-project(AllegroHand)
+project(controller)
 
 Set (AllegroHand_VERSION_MAJOR 1)
 Set (AllegroHand_VERSION_MINOR 0)

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O2 -Wall CMakeFiles/grasp.dir/can_communicator.cpp.o CMakeFiles/grasp.dir/canAPI.cpp.o CMakeFiles/grasp.dir/RockScissorsPaper.cpp.o CMakeFiles/grasp.dir/controller.cpp.o -o grasp  -lBHand -lpcanbasic -lpthread 
