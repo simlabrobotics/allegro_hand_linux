@@ -1,0 +1,5 @@
+# Request
+int32 config_idx
+---
+# Response
+bool success

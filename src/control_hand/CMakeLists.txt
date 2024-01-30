@@ -6,6 +6,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(std_srvs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
 include_directories(${rclcpp_INCLUDE_DIRS})
 
@@ -34,7 +35,16 @@ target_include_directories(control_hand
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/>
     $<INSTALL_INTERFACE:include/>)
 
-# install(TARGETS control_hand control_hand EXPORT control_hand-targets)
+rosidl_generate_interfaces(${PROJECT_NAME}_interfaces
+"srv/Move.srv"
+LIBRARY_NAME ${PROJECT_NAME}
+)
+
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME}_interfaces
+  "rosidl_typesupport_cpp"
+)
+
+target_link_libraries(control_hand "${cpp_typesupport_target}")
 
 install(TARGETS control_hand
   EXPORT control_hand-targets
@@ -51,6 +61,12 @@ install(EXPORT control_hand-targets
   
 install(TARGETS controller
 DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY
+  srv
+  DESTINATION share/${PROJECT_NAME}
+)
+
 
 
 
