@@ -4,7 +4,7 @@
 // myAllegroHand.cpp : Defines the entry point for the console application.
 //
 
-#include "can_communicator.h"
+#include "control_hand/can_communicator.h"
 
 using namespace std;
 

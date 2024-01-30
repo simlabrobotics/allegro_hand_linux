@@ -24,8 +24,8 @@ typedef void* LPSTR;
 
 #include <PCANBasic.h>
 
-#include "controller/canDef.h"
-#include "controller/canAPI.h"
+#include "control_hand/canDef.h"
+#include "control_hand/canAPI.h"
 
 CANAPI_BEGIN
 

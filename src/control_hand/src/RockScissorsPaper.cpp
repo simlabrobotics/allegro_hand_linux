@@ -1,5 +1,5 @@
 
-#include "controller/rDeviceAllegroHandCANDef.h"
+#include "control_hand/rDeviceAllegroHandCANDef.h"
 #include <BHand/BHand.h>
 
 // ROCK-SCISSORS-PAPER(LEFT HAND)
