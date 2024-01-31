@@ -1,18 +1,14 @@
 import numpy as np
 import tensorflow as tf
-
 import os
-print("Current working directory:", os.getcwd())
-
 class KeyPointClassifier(object):
-    def __init__(
-        self,
-        model_path='src/gesture_classifier/gesture_classifier/submodules/model/keypoint_classifier/keypoint_classifier.tflite',
-        num_threads=1,
-    ):
-        self.interpreter = tf.lite.Interpreter(model_path=model_path,
-                                               num_threads=num_threads)
+    def __init__(self, num_threads=1):
+        # Determine the directory of the current file
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        # Construct the full path to the model
+        model_path = os.path.join(dir_path, 'keypoint_classifier.tflite')
 
+        self.interpreter = tf.lite.Interpreter(model_path=model_path, num_threads=num_threads)
         self.interpreter.allocate_tensors()
         self.input_details = self.interpreter.get_input_details()
         self.output_details = self.interpreter.get_output_details()
